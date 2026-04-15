@@ -1,0 +1,240 @@
+/* css/login.css - Orbital HUD Login Style */
+
+/* --- CONTAINER & PANEL --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 100px 20px 40px; /* Padding atas agar tidak tertimpa navbar */
+}
+
+.login-panel {
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 15px rgba(14, 165, 233, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Garis Pendaran di Atas Panel */
+.login-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
+}
+
+/* --- HEADER --- */
+.panel-header-glitch {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.panel-header-glitch h2 {
+    color: var(--accent-neon);
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.panel-header-glitch p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-family: 'Consolas', monospace; /* Ala terminal */
+}
+
+/* --- CAMERA SCANNER MODULE (HUD STYLE) --- */
+.scanner-module {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.camera-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3; /* Proporsi kamera standar */
+    background-color: #000;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(14, 165, 233, 0.2);
+}
+
+/* Video Kamera (Dibalik agar seperti cermin) */
+#loginVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); 
+    opacity: 0.8; /* Sedikit digelapkan agar UI HUD terlihat */
+}
+
+/* Sudut-Sudut Pembidik (HUD Corners) */
+.target-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-color: var(--color-btn-main); /* Warna oranye admin */
+    border-style: solid;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.top-left { top: 15px; left: 15px; border-width: 3px 0 0 3px; }
+.top-right { top: 15px; right: 15px; border-width: 3px 3px 0 0; }
+.bottom-left { bottom: 15px; left: 15px; border-width: 0 0 3px 3px; }
+.bottom-right { bottom: 15px; right: 15px; border-width: 0 3px 3px 0; }
+
+/* Efek Garis Laser Scanner */
+.scan-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--color-btn-main);
+    box-shadow: 0 0 15px var(--color-btn-main), 0 0 30px var(--color-btn-main);
+    opacity: 0.6;
+    z-index: 5;
+    animation: scanMotion 3s ease-in-out infinite alternate;
+}
+
+@keyframes scanMotion {
+    0% { top: 5%; opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { top: 95%; opacity: 0; }
+}
+
+/* Teks Status Kamera */
+.camera-status {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--accent-neon);
+    color: var(--accent-neon);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.75rem;
+    z-index: 10;
+    backdrop-filter: blur(2px);
+    white-space: nowrap;
+}
+
+.status-wait { border-color: var(--text-secondary); color: var(--text-secondary); }
+.status-ready { border-color: #10b981; color: #10b981; }
+.status-error { border-color: #ef4444; color: #ef4444; }
+
+/* --- INPUT FORMS --- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-neon);
+    font-size: 1.1rem;
+}
+
+.orbital-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-spaceship);
+    color: var(--text-primary);
+    padding: 12px 15px 12px 45px; /* Padding kiri ekstra untuk ikon */
+    font-family: 'Consolas', monospace; /* Font terminal */
+    font-size: 1rem;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.orbital-input:focus {
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
+    background: rgba(14, 165, 233, 0.05);
+}
+
+.orbital-input::placeholder {
+    color: #475569;
+}
+
+/* --- BUTTON & ALERTS --- */
+.btn-full {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.orbital-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.orbital-alert.hidden {
+    display: none;
+}
+
+/* --- FOOTER PANEL --- */
+.panel-footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 15px;
+}
+
+.panel-footer a {
+    color: var(--accent-neon);
+    font-weight: bold;
+}
+
+.panel-footer a:hover {
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* --- ANIMASI GLOBAL UTILITIES --- */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

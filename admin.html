@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVERSEER COMMAND | Data Sorcerers</title>
+    
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="orbital-layout">
+
+    <div id="navbar-container"></div>
+    
+    <div id="sidebar-container"></div>
+
+    <main class="admin-main-content">
+        <header class="admin-page-header">
+            <div class="header-titles">
+                <h2><i class="fi fi-rr-chess-king"></i> OVERSEER COMMAND</h2>
+                <p class="subtitle">Otoritas Kendali Gerbang & Konfigurasi Sesi</p>
+            </div>
+            <div class="header-tools">
+                <div class="wib-clock" id="wibClock">--:--:-- WIB</div>
+            </div>
+        </header>
+
+        <div id="tab-config" class="tab-content active">
+            <section class="orbital-panel config-section">
+                <div class="panel-header">
+                    <h3><i class="fi fi-rr-bolt"></i> MASTER CONTROL GERBANG</h3>
+                    <p class="dim-text">Kendalikan pembukaan radar presensi dan parameter sesi secara manual.</p>
+                </div>
+                
+                <div class="panel-body">
+                    <div class="config-row two-cols">
+                        <div class="orbital-card session-date-card">
+                            <label class="card-label">TANGGAL SESI AKTIF (YYYY-MM-DD)</label>
+                            <input type="date" id="cfgDate" class="orbital-input">
+                        </div>
+                        <div class="orbital-card day-selector-card">
+                            <label class="card-label">HARI AKTIF (HANYA INFO)</label>
+                            <div class="day-checkbox-group">
+                                <label class="day-check-item"><input type="checkbox" value="1" class="day-cb" checked disabled> Sen</label>
+                                <label class="day-check-item"><input type="checkbox" value="2" class="day-cb" checked disabled> Sel</label>
+                                <label class="day-check-item"><input type="checkbox" value="3" class="day-cb" checked disabled> Rab</label>
+                                <label class="day-check-item"><input type="checkbox" value="4" class="day-cb" checked disabled> Kam</label>
+                                <label class="day-check-item"><input type="checkbox" value="5" class="day-cb" checked disabled> Jum</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-row three-cols">
+                        <div class="orbital-card time-card">
+                            <label class="card-label">GERBANG DIBUKA (WIB)</label>
+                            <input type="time" id="cfgOpen" class="orbital-input" value="18:45">
+                        </div>
+                        <div class="orbital-card time-card highlight-card">
+                            <label class="card-label">TARGET TEPAT WAKTU (WIB)</label>
+                            <input type="time" id="cfgTarget" class="orbital-input" value="19:00">
+                        </div>
+                        <div class="orbital-card time-card danger-card">
+                            <label class="card-label">GERBANG ALPHA / TUTUP (WIB)</label>
+                            <input type="time" id="cfgClose" class="orbital-input" value="19:10">
+                        </div>
+                    </div>
+
+                    <div class="config-row full-width">
+                        <div class="orbital-card">
+                            <label class="card-label"><i class="fi fi-rr-map-marker"></i> KALIBRASI RADAR LOKASI (PIN POINT)</label>
+                            <div id="mapRadar" style="height: 320px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(14, 165, 233, 0.3); background: #020617;"></div>
+                            <div class="config-row two-cols">
+                                <div class="input-with-label">
+                                    <label class="dim-text" style="font-size: 0.7rem; display: block; margin-bottom: 5px;">LATITUDE</label>
+                                    <input type="text" id="cfgLat" class="orbital-input" placeholder="-7.747XXX" readonly>
+                                </div>
+                                <div class="input-with-label">
+                                    <label class="dim-text" style="font-size: 0.7rem; display: block; margin-bottom: 5px;">LONGITUDE</label>
+                                    <input type="text" id="cfgLng" class="orbital-input" placeholder="110.374XXX" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-row full-width">
+                        <div class="master-control-box">
+                            <div class="control-status">
+                                <span class="dim-text">STATUS OTORISASI:</span>
+                                <div id="masterStatusText" class="status-indicator off">SYSTEM DEACTIVATED</div>
+                            </div>
+                            
+                            <div class="control-actions">
+                                <button class="btn-spaceship outline" id="btnUpdateParams">
+                                    <i class="fi fi-rr-disk"></i> SIMPAN PARAMETER
+                                </button>
+                                
+                                <button class="btn-spaceship btn-master-switch" id="btnMasterSwitch">
+                                    <i class="fi fi-rr-power"></i> INITIALIZE SYSTEM OPEN
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-row full-width">
+                        <div class="orbital-alert alert-warning">
+                            <i class="fi fi-rr-shield-check alert-icon"></i>
+                            <div class="alert-text">
+                                <strong>OVERSEER PROTOCOL:</strong> Dashboard Kru akan tetap terkunci meskipun waktu sudah sesuai, kecuali <b>Master Switch</b> diaktifkan. Gunakan "Simpan Parameter" sebelum membuka gerbang.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="tab-logs" class="tab-content">
+            <section class="orbital-panel log-section">
+                <div class="panel-header flex-between">
+                    <div>
+                        <h3><i class="fi fi-rr-list-check"></i> TRANSMISI RADAR</h3>
+                        <p class="dim-text">Pantau kru yang masuk dan lakukan override status secara manual.</p>
+                    </div>
+                    <div class="header-tools">
+                        <input type="date" id="filterDate" class="orbital-input date-picker">
+                    </div>
+                </div>
+                
+                <div class="panel-body no-padding">
+                    <div class="table-container hud-table-wrapper">
+                        <table class="orbital-table hud-style">
+                            <thead>
+                                <tr>
+                                    <th>WAKTU (WIB)</th>
+                                    <th>NAMA KRU</th>
+                                    <th>STATUS SISTEM</th>
+                                    <th>OVERRIDE</th>
+                                    <th>POIN</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminLogsBody">
+                                <tr><td colspan="5" class="table-loader">Mencari transmisi data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="tab-leaderboard" class="tab-content">
+            <section class="orbital-panel leaderboard-section">
+                <div class="panel-header">
+                    <h3><i class="fi fi-rr-trophy"></i> INTERNAL KLASEMEN</h3>
+                    <p class="dim-text">Akumulasi poin kedisiplinan kru di bawah pengawasan Overseer.</p>
+                </div>
+                
+                <div class="panel-body no-padding">
+                    <div class="table-container hud-table-wrapper">
+                        <table class="orbital-table leaderboard-style">
+                            <thead>
+                                <tr>
+                                    <th>RANK</th>
+                                    <th>ID KRU</th>
+                                    <th>NAMA LENGKAP</th>
+                                    <th>DIVISI</th>
+                                    <th>TOTAL POIN</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboardBody">
+                                <tr><td colspan="5" class="table-loader">Mengkalkulasi peringkat...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <div id="securityModal" class="security-overlay hidden">
+        <div class="security-box">
+            <i class="fi fi-rr-shield-exclamation alarm-icon"></i>
+            <h2>PROTOKOL KELUAR</h2>
+            <div class="security-actions">
+                <button id="btnStay" class="btn-spaceship outline">BATAL</button>
+                <button id="btnForceLogout" class="btn-spaceship danger-solid">LOGOUT</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script src="js/core.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

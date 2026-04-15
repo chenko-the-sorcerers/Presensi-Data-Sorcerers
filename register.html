@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Kru | Data Sorcerers</title>
+    
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+
+    <main class="register-container">
+        <div class="hero-panel form-panel">
+            <div class="panel-header">
+                <h2>PROTOKOL ONBOARDING</h2>
+                <p class="subtitle">Registrasi Manifes Kru Baru</p>
+            </div>
+
+            <form id="regForm">
+                
+                <div id="step1">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>ID KRU (DS-ID)</label>
+                            <input type="text" id="regId" placeholder="Contoh: DS-2026-001" required style="text-transform: uppercase;">
+                        </div>
+                        <div class="input-group">
+                            <label>NAMA LENGKAP</label>
+                            <input type="text" id="regNama" required placeholder="Sesuai kartu identitas">
+                        </div>
+                        <div class="input-group">
+                            <label>ALAMAT SUREL (EMAIL)</label>
+                            <input type="email" id="regEmail" required placeholder="email@kampus.ac.id">
+                        </div>
+                        <div class="input-group">
+                            <label>NOMOR WHATSAPP</label>
+                            <input type="tel" id="regWa" required placeholder="08123456789">
+                        </div>
+                        <div class="input-group">
+                            <label>TANGGAL LAHIR</label>
+                            <input type="date" id="regLahir" required>
+                        </div>
+                        <div class="input-group">
+                            <label>POSISI / DIVISI</label>
+                            <select id="regPosisi" required>
+                                <option value="">-- Pilih Posisi --</option>
+                                <option value="Lead">Lead</option>
+                                <option value="Co-Lead">Co-Lead</option>
+                                <option value="Secretary">Secretary</option>
+                                <option value="AIRDT">AI Research and Development Team</option>
+                                <option value="SDT">Software Development Team</option>
+                                <option value="Data Team">Data Team</option>
+                                <option value="UI/UX Team">UI/UX Team</option>
+                                <option value="Public Relation">Public Relation</option>
+                                <option value="Creative Team">Creative Team</option>
+                                <option value="Internal Management">Internal Management</option>
+                                <option value="IoT Team">IoT Team</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label>NAMA KAMPUS</label>
+                            <input type="text" id="regKampus" placeholder="Contoh: Universitas Teknologi Yogyakarta">
+                        </div>
+                        <div class="input-group">
+                            <label>JURUSAN</label>
+                            <input type="text" id="regJurusan" placeholder="Contoh: Informatika">
+                        </div>
+                        <div class="input-group">
+                            <label>TAHUN MASUK KULIAH</label>
+                            <input type="number" id="regTahun" placeholder="Contoh: 2020">
+                        </div>
+                        <div class="input-group">
+                            <label>LINK INSTAGRAM</label>
+                            <input type="text" id="regIg" placeholder="@username">
+                        </div>
+                        <div class="input-group">
+                            <label>LINK GITHUB</label>
+                            <input type="text" id="regGithub" placeholder="github.com/username">
+                        </div>
+                        <div class="input-group">
+                            <label>LINK LINKEDIN</label>
+                            <input type="text" id="regLinkedin" placeholder="linkedin.com/in/username">
+                        </div>
+
+                        <div class="input-group full-width">
+                            <label>MOTTO HIDUP</label>
+                            <input type="text" id="regMotto" required placeholder="Kalimat sandi Anda...">
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-spaceship btn-full" id="btnNextStep">
+                        LANJUT: KALIBRASI BIOMETRIK <i class="fi fi-rr-arrow-right" style="margin-left: 10px;"></i>
+                    </button>
+                </div>
+
+                <div id="step2" style="display: none;">
+                    <h3 style="color: #10b981; margin-bottom: 15px; text-align: center;">KALIBRASI BIOMETRIK</h3>
+                    <p style="font-size: 0.85rem; margin-bottom: 25px; text-align: center; color: var(--text-secondary);">Tatap kamera dengan posisi wajah lurus dan pencahayaan terang.</p>
+                    
+                    <div class="scanner-viewport">
+                        <div class="corner top-left"></div><div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+                        
+                        <video id="regVideo" autoplay playsinline muted></video>
+                        <canvas id="regCanvas"></canvas>
+                        
+                        <div id="laserScan" class="laser-beam" style="display: none;"></div>
+                    </div>
+
+                    <div class="system-msg" id="regStatus">Menunggu inisialisasi kamera...</div>
+
+                    <div class="action-buttons" style="display: flex; gap: 15px; justify-content: space-between;">
+                        <button type="button" class="btn-spaceship" id="btnBack" style="border-color: #ef4444; color: #ef4444;">KEMBALI</button>
+                        <button type="submit" class="btn-spaceship" id="btnSubmit" style="display: none; border-color: #10b981; color: #10b981; flex: 1;">KIRIM MANIFES KRU</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="successModal" class="orbital-modal">
+            <div class="modal-content">
+                <div class="modal-icon">
+                    <i class="fi fi-rr-check-circle"></i>
+                </div>
+                <h3 class="modal-title">REGISTRASI BERHASIL</h3>
+                <p class="modal-text">Identitas Anda telah masuk ke manifes Orbital.</p>
+                <div class="scan-line-modal"></div>
+                <button type="button" id="btnModalClose" class="btn-spaceship btn-full" style="border-color: #10b981; color: #10b981;">
+                    PROSES KE LOGIN
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>

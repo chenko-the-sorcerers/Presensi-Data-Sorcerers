@@ -1,0 +1,124 @@
+/* css/presensi.css */
+
+.scanner-container {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.radar-panel {
+    background-color: var(--bg-panel);
+    width: 100%;
+    max-width: 600px; /* Sedikit lebih lebar dari login untuk layar kamera */
+    padding: 30px;
+    border: var(--border-spaceship);
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.8), inset 0 0 15px rgba(16, 185, 129, 0.1);
+}
+
+.panel-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.panel-header h2 {
+    color: #10b981; /* Warna hijau radar */
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* --- AREA VIEWPORT KAMERA --- */
+.scanner-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3; /* Proporsi standar webcam */
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Video dan Canvas ditumpuk persis sama */
+#videoElement, #overlayCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); /* Efek Cermin (Mirror) agar gerak kepala natural */
+}
+
+/* Bingkai Pembidik Sci-Fi (Corners) */
+.corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #10b981;
+    z-index: 10;
+}
+
+.top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; }
+.top-right { top: 15px; right: 15px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 15px; left: 15px; border-right: none; border-top: none; }
+.bottom-right { bottom: 15px; right: 15px; border-left: none; border-top: none; }
+
+/* Animasi Laser Scanning */
+.laser-beam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #10b981;
+    box-shadow: 0 0 15px #10b981, 0 0 30px #10b981;
+    z-index: 5;
+    animation: scanVertical 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes scanVertical {
+    0% { top: 5%; opacity: 0.8; }
+    100% { top: 95%; opacity: 0.8; }
+}
+
+/* --- TELEMETRI BOX --- */
+.telemetry-box {
+    background: rgba(2, 6, 23, 0.8);
+    border: 1px dashed rgba(16, 185, 129, 0.4);
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Consolas', monospace;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.data-row:last-child { margin-bottom: 0; }
+
+.label {
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.value {
+    color: var(--text-primary);
+    font-weight: bold;
+    text-align: right;
+}
+
+.highlight-text {
+    color: var(--accent-neon);
+    animation: blinkText 1.5s infinite;
+}
+
+@keyframes blinkText {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}

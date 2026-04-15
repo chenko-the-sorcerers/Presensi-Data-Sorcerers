@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERNSHIP SECTOR | Data Sorcerers</title>
+    
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <style>
+        .shipyard-wrapper {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, rgba(14, 165, 233, 0.05) 0%, rgba(2, 6, 23, 1) 80%);
+        }
+
+        .construction-hub {
+            position: relative;
+            padding: 60px;
+            border: 1px dashed var(--accent-neon);
+            background: rgba(15, 23, 42, 0.5);
+            max-width: 700px;
+            border-radius: 4px;
+        }
+
+        .construction-icon {
+            font-size: 5rem;
+            color: var(--accent-neon);
+            margin-bottom: 20px;
+            animation: rotateGear 4s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes rotateGear {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .sector-title {
+            font-size: 2rem;
+            letter-spacing: 5px;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .sector-status {
+            font-family: monospace;
+            color: var(--accent-neon);
+            background: rgba(14, 165, 233, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .sector-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 65%; /* Estivasi Progress */
+            height: 100%;
+            background: var(--accent-neon);
+            box-shadow: 0 0 15px var(--accent-neon);
+            animation: loadingProgress 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 40%; }
+            100% { width: 70%; }
+        }
+
+        .btn-base {
+            padding: 12px 30px;
+            border: 1px solid var(--accent-neon);
+            color: var(--accent-neon);
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .btn-base:hover {
+            background: var(--accent-neon);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+    </style>
+</head>
+<body class="orbital-layout">
+
+    <div id="navbar-container"></div>
+
+    <main class="shipyard-wrapper">
+        <div class="construction-hub">
+            <div class="construction-icon">
+                <i class="fi fi-rr-settings"></i>
+            </div>
+            
+            <h1 class="sector-title">Internship Program</h1>
+            <div class="sector-status">STATUS: UNDER DEVELOPMENT</div>
+            
+            <p class="sector-desc">
+                Sektor Perekrutan Magang sedang dalam tahap konstruksi orbital. Kami sedang menyiapkan kurikulum dan modul pelatihan standar global untuk kru masa depan PT. Data Sorcerers Indonesia.
+            </p>
+
+            <div class="progress-bar-container">
+                <div class="progress-fill"></div>
+            </div>
+
+            <a href="dashboard.html" class="btn-base">
+                <i class="fi fi-rr-angle-left"></i> Kembali ke Dashboard
+            </a>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="js/core.js"></script>
+</body>
+</html>

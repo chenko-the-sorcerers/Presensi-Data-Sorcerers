@@ -1,0 +1,131 @@
+/* css/sidebar.css - Sidebar Styles */
+
+/* Update di css/sidebar.css */
+
+.orbital-sidebar {
+    position: fixed;
+    top: 90px; /* Menyambung pas di bawah Navbar */
+    left: 0;
+    width: 260px;
+    
+    /* FIX: Biarkan tingginya menyentuh lantai dasar layar */
+    height: calc(100vh - 90px); 
+    
+    /* FIX: Beri bantalan dalam di bawah agar tombol terdorong ke atas Footer */
+    padding-bottom: 60px; 
+    
+    background: rgba(2, 6, 23, 0.98);
+    border-right: 1px solid rgba(245, 158, 11, 0.3);
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    
+    /* Z-index 1000 berarti ia berada di bawah Footer (z-index: 2000) */
+    z-index: 1000; 
+    transition: all 0.3s ease;
+}
+
+/* Header Sidebar */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 25px 20px;
+    border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.header-icon {
+    font-size: 2.5rem;
+    color: var(--color-btn-main);
+    text-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+}
+
+.header-text h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 3px;
+}
+
+.badge-admin {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--color-btn-main);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-family: 'Consolas', monospace;
+    letter-spacing: 1px;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* Menu Navigasi */
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+    flex-grow: 1; /* Mengisi sisa ruang kosong di tengah */
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.menu-item i {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+    background: rgba(14, 165, 233, 0.05);
+    color: var(--text-primary);
+}
+
+.menu-item:hover i {
+    transform: translateX(5px);
+}
+
+/* Status Aktif (Tab yang sedang dibuka) */
+.menu-item.active {
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), transparent);
+    border-left: 3px solid var(--color-btn-main);
+    color: var(--color-btn-main);
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+/* Tombol Footer Logout */
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.btn-sidebar-logout {
+    width: 100%;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+    padding: 12px;
+    border-radius: 6px;
+    font-family: var(--font-main);
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-sidebar-logout:hover {
+    background: #ef4444;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication | Data Sorcerers</title>
+    
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="orbital-layout">
+
+    <div id="navbar-container"></div>
+
+    <main class="login-container">
+        <div class="login-panel">
+            
+            <div class="panel-header-glitch">
+                <h2><i class="fi fi-rr-fingerprint"></i> PROTOKOL AUTENTIKASI</h2>
+                <p>Verifikasi Ganda: Identitas & Liveness Biometrik</p>
+            </div>
+
+            <div class="scanner-module">
+                <div class="camera-frame" style="position: relative;">
+                    <video id="loginVideo" autoplay muted playsinline></video>
+                    
+                    <canvas id="loginCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5;"></canvas>
+                    
+                    <div id="laserScan" class="scan-overlay" style="display: none;"></div>
+                    
+                    <div class="target-corner top-left"></div>
+                    <div class="target-corner top-right"></div>
+                    <div class="target-corner bottom-left"></div>
+                    <div class="target-corner bottom-right"></div>
+                    
+                    <div id="cameraStatus" class="camera-status status-wait">Menunggu Akses Kamera...</div>
+                </div>
+            </div>
+
+            <div class="auth-form">
+                <div class="input-group">
+                    <label for="crewId">CREW IDENTIFICATION NUMBER (ID)</label>
+                    <div class="input-with-icon">
+                        <i class="fi fi-rr-id-badge"></i>
+                        <input type="text" id="crewId" class="orbital-input" placeholder="Contoh: DS-2026-001" autocomplete="off">
+                    </div>
+                </div>
+
+                <div id="loginAlert" class="orbital-alert hidden">
+                    <i class="fi fi-rr-triangle-warning"></i>
+                    <span id="alertMessage">Peringatan sistem.</span>
+                </div>
+
+                <button id="btnLogin" class="btn-spaceship btn-full">
+                    <i class="fi fi-rr-face-viewfinder"></i> VERIFIKASI & MASUK
+                </button>
+            </div>
+            
+            <div class="panel-footer">
+                Kru baru? <a href="register.html">Minta izin akses di sini.</a>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    
+    <script src="js/core.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

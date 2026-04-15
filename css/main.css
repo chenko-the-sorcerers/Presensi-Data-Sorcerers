@@ -1,0 +1,159 @@
+/* css/main.css - Sci-Fi Orbital Theme (Centered Fix) */
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap');
+
+/* --- VARIABEL GLOBAL --- */
+:root {
+    --bg-space: #020617; 
+    --bg-panel: #0f172a; 
+    --accent-neon: #0ea5e9; 
+    --accent-glow: rgba(14, 165, 233, 0.3);
+    --text-primary: #f1f5f9; 
+    --text-secondary: #94a3b8; 
+    --color-btn-main: #f59e0b; 
+    
+    --font-main: 'Exo 2', sans-serif;
+    --border-spaceship: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+/* --- GLOBAL RESET & TYPOGRAPHY --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Kunci agar padding tidak merusak ukuran elemen */
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-space);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+    
+    /* Animasi Bintang */
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    animation: backgroundMove 100s linear infinite;
+}
+
+@keyframes backgroundMove {
+    from { background-position: 0 0, 40px 60px, 130px 270px; }
+    to { background-position: 550px 550px, 390px 410px, 380px 520px; }
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 { font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+ul { list-style: none; }
+
+/* --- NAVBAR STYLING --- */
+header {
+    background-color: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(5px);
+    border-bottom: var(--border-spaceship);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-neon); text-shadow: 0 0 10px var(--accent-glow); }
+.nav-links { display: flex; gap: 30px; }
+.nav-links a:hover { color: var(--accent-neon); text-shadow: 0 0 8px var(--accent-glow); }
+
+/* --- HERO SECTION STYLING (FIXED CENTERING) --- */
+.hero {
+    /* Menggunakan min-height agar tidak terpotong di layar HP, dan flex untuk sentralisasi absolut */
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px 40px; /* Padding atas untuk memberi ruang pada Navbar */
+}
+
+.hero-panel {
+    background-color: var(--bg-panel);
+    padding: 50px;
+    border-radius: 10px;
+    border: var(--border-spaceship);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow);
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Lebar maksimal panel */
+    margin: 0 auto; /* Otomatis menyeimbangkan margin kiri dan kanan */
+}
+
+/* Sudut Tajam (HUD Frame) */
+.hero-panel::before {
+    content: ''; position: absolute; top: -2px; left: -2px; width: 30px; height: 30px;
+    border-top: 3px solid var(--accent-neon); border-left: 3px solid var(--accent-neon); border-radius: 5px 0 0 0;
+}
+.hero-panel::after {
+    content: ''; position: absolute; bottom: -2px; right: -2px; width: 30px; height: 30px;
+    border-bottom: 3px solid var(--accent-neon); border-right: 3px solid var(--accent-neon); border-radius: 0 0 5px 0;
+}
+
+.hero h1 {
+    font-size: 3rem; margin-bottom: 20px;
+    background: linear-gradient(to right, var(--text-primary), var(--accent-neon));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero p { 
+    font-size: 1.2rem; 
+    color: var(--text-secondary); 
+    margin-bottom: 40px; 
+    max-width: 600px; 
+    margin-left: auto; 
+    margin-right: auto; /* Memastikan paragraf selalu di tengah secara teks dan blok */
+}
+
+/* --- BUTTON STYLING --- */
+.btn-spaceship {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 40px; 
+    background-color: transparent;
+    border: 2px solid var(--color-btn-main); 
+    color: var(--color-btn-main);
+    font-family: var(--font-main); 
+    font-weight: bold; 
+    text-transform: uppercase;
+    letter-spacing: 2px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: all 0.3s ease;
+    width: auto;
+}
+
+.btn-spaceship:hover {
+    background-color: var(--color-btn-main); 
+    color: var(--bg-space);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+}
+
+/* --- FOOTER STYLING --- */
+footer {
+    background-color: var(--bg-panel); 
+    border-top: var(--border-spaceship);
+    padding: 30px 0; 
+    text-align: center; 
+    color: var(--text-secondary); 
+    font-size: 0.9rem;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Scan | Data Sorcerers</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/presensi.css">
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+
+    <main class="scanner-container">
+        <div class="radar-panel">
+            <div class="panel-header">
+                <h2>RADAR BIOMETRIK</h2>
+                <p class="subtitle">Pencocokan Identitas Orbital</p>
+            </div>
+
+            <div class="scanner-viewport">
+                <div class="corner top-left"></div>
+                <div class="corner top-right"></div>
+                <div class="corner bottom-left"></div>
+                <div class="corner bottom-right"></div>
+
+                <video id="videoElement" autoplay playsinline muted></video>
+                <canvas id="overlayCanvas"></canvas>
+                
+                <div id="laserScan" class="laser-beam" style="display: none;"></div>
+            </div>
+
+            <div class="telemetry-box">
+                <div class="data-row">
+                    <span class="label">SUBJEK:</span>
+                    <span class="value" id="displayCrewId">MENGIDENTIFIKASI...</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">STATUS:</span>
+                    <span class="value highlight-text" id="instructionText">Menunggu otorisasi sistem...</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/api.js"></script> 
+    <script src="js/face-logic.js"></script>
+</body>
+</html>

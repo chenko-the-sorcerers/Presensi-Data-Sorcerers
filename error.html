@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM ALERT | Data Sorcerers</title>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        .alert-wrapper {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: #020617;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Warning Overlay */
+        .alert-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.05) 10px, transparent 10px, transparent 20px);
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .alert-container {
+            position: relative;
+            z-index: 10;
+            border: 1px solid #ef4444;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 50px;
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(239, 68, 68, 0.2);
+            max-width: 600px;
+        }
+
+        .alert-code {
+            font-size: 6rem;
+            font-weight: 900;
+            color: #ef4444;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+
+        .alert-title {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: #fff;
+            margin: 15px 0;
+            text-transform: uppercase;
+        }
+
+        .alert-msg {
+            color: #94a3b8;
+            font-family: monospace;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .warning-strip {
+            height: 4px;
+            width: 100%;
+            background: repeating-linear-gradient(to right, #ef4444 0, #ef4444 20px, #000 20px, #000 40px);
+            margin-bottom: 30px;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-emergency {
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-reboot {
+            background: #ef4444;
+            color: #000;
+        }
+
+        .btn-reboot:hover {
+            box-shadow: 0 0 20px #ef4444;
+            transform: translateY(-2px);
+        }
+
+        .btn-contact {
+            border: 1px solid #94a3b8;
+            color: #94a3b8;
+        }
+
+        .btn-contact:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="orbital-layout">
+
+    <div id="navbar-container"></div>
+
+    <main class="alert-wrapper">
+        <div class="alert-container">
+            <h1 id="errCode" class="alert-code">500</h1>
+            <div class="warning-strip"></div>
+            <h2 id="errTitle" class="alert-title">CORE MELTDOWN DETECTED</h2>
+            <p id="errMsg" class="alert-msg">
+                Satelit pusat mengalami kegagalan transmisi data internal. Protokol otomatis sedang mencoba menstabilkan sistem.
+            </p>
+
+            <div class="action-btns">
+                <a href="javascript:location.reload()" class="btn-emergency btn-reboot">REBOOT SYSTEM</a>
+                <a href="https://wa.me/your-number" class="btn-emergency btn-contact">CONTACT OVERSEER</a>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="js/core.js"></script>
+    <script>
+        // Logika Dinamis untuk mendeteksi tipe error
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+
+        if (type === '503') {
+            document.getElementById('errCode').textContent = '503';
+            document.getElementById('errCode').style.color = '#f59e0b'; // Oranye Maintenance
+            document.querySelector('.alert-container').style.borderColor = '#f59e0b';
+            document.querySelector('.warning-strip').style.background = 'repeating-linear-gradient(to right, #f59e0b 0, #f59e0b 20px, #000 20px, #000 40px)';
+            
+            document.getElementById('errTitle').textContent = 'BASE UNDER MAINTENANCE';
+            document.getElementById('errMsg').textContent = 'Pangkalan sedang dalam mode perbaikan perisai orbital. Akses ditutup sementara untuk keamanan kru.';
+            
+            const btnReboot = document.querySelector('.btn-reboot');
+            btnReboot.textContent = 'CHECK STATUS';
+            btnReboot.style.background = '#f59e0b';
+        }
+    </script>
+</body>
+</html>
